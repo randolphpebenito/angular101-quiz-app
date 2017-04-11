@@ -84,7 +84,41 @@
           </div>
         </div> <!-- List Controller -->
         <div ng-controller="quizCtrl as quiz" ng-show="quiz.quizMetrics.quizActive">
-            <h1>Quiz</h1>
+            <div class="row">
+                <div class="col-xs-8">
+                    <h2>Progress:</h2>
+                    <div class="btn-toolbar">
+                        <button 
+                            class="btn" 
+                            ng-repeat="question in quiz.dataService.quizQuestions"
+                            ng-class="{'btn-info': question.selected !== null, 'btn-danger': question.selected === null}"
+                        >
+                        <i 
+                            ng-class="{'fa fa-pencil': question.selected !== null, 'fa fa-question-circle': question.selected === null}" 
+                        aria-hidden="true"
+                        ></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="row">
+                        <h4>Legend:</h4>
+                        <div class="col-sm-4">
+                            <button class="btn btn-info">
+								<i class="fa fa-pencil" aria-hidden="true"></i>
+                            </button>
+                            <p>Answered</p>
+                        </div>
+                        <div class="col-sm-4">
+                            <button class="btn btn-danger">
+								<i class="fa fa-question-circle" aria-hidden="true"></i>
+                            </button>
+                            <p>Unanswered</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div> <!-- Progress Area -->
 
         </div> <!-- Quiz Controller --> 
 	</div><!-- container -->
