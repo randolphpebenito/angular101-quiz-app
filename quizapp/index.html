@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='quizApp'>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Family Quiz App | AngularJS</title>
+    <!--<link rel="stylesheet" href="./css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+
+    <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+	<div class="container">
+		<div class="page-header">
+			<h1><strong>COMPANY HEIRARCHY QUIZ</strong></h1>
+            <h3>A Simple Quiz App using the power of AngularJS</h3>
+        </div>
+		<div ng-controller="listCtrl as list" ng-hide="list.quizMetrics.quizActive">
+			<form class="form-inline well well-sm clearfix">
+				<input type"text" placeholder="Search" class="form-control" ng-model="list.search">
+				<i class="fa fa-search" aria-hidden="true"></i>
+				<button class="btn btn-warning pull-right" ng-click="list.activateQuiz()">
+					<strong>Start Quiz</strong>
+				</button>
+
+			</form>
+			<div class="row">
+				<div class="col-sm-6" ng-repeat="emp in list.data | filter:list.search">
+					<div class="well well-sm">
+						<div class="row">
+							<div class="col-md-6">
+								<div ng-if="emp.gender == 'Male'">
+									<i class="fa fa-male fa-5x icon-center" aria-hidden="true"></i>
+								</div>
+								<div ng-if="emp.gender == 'Female'">
+									<i class="fa fa-female fa-5x icon-center" aria-hidden="true"></i>
+								</div>
+
+							</div>
+							<div class="col-md-6">
+								<h4>{{ emp.position }}</h4>
+								<p><strong>Name:</strong>{{ emp.name }}</p>
+								<p><strong>Team:</strong>{{ emp.team }}</p>
+								<p><strong>Age:</strong>{{ emp.age}}</p>
+								<button class="btn btn-primary pull-right"
+									data-toggle="modal"
+									data-target="#emp-info"
+									ng-click="list.changeActiveEmp(emp)">Learn More</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			  <div class="modal" id="emp-info">
+				<div class="modal-dialog">
+				  <div class="modal-content">
+					<div class="modal-header">
+							<h2>{{ list.activeEmp.position }}</h2>   
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div ng-if="list.activeEmp.gender == 'Male'">
+								<i class="fa fa-male fa-5x icon-modal-center" aria-hidden="true"></i>
+							</div>
+							<div ng-if="list.activeEmp.gender == 'Female'">
+								<i class="fa fa-female fa-5x icon-modal-center" aria-hidden="true"></i>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<p><strong>Name:</strong>{{ list.activeEmp.name }}</p>
+								<p><strong>Team:</strong>{{ list.activeEmp.team }}</p>
+								<p><strong>Age:</strong>{{ list.activeEmp.age}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+					  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					</div>
+				  </div>
+				</div>
+          </div>
+        </div> <!-- List Controller -->
+        <div ng-controller="quizCtrl as quiz" ng-show="quiz.quizMetrics.quizActive">
+            <h1>Quiz</h1>
+
+        </div> <!-- Quiz Controller --> 
+	</div><!-- container -->
+
+	<! -- Angular CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js'></script>
+
+	<!-- Angular App scripts -->
+	<script src='./js/app.js'></script>
+	<script src='./js/controllers/list.js'></script>
+	<script src='./js/controllers/quiz.js'></script>
+	<script src='./js/factories/quizMetrics.js'></script>
+	<script src='./js/factories/dataService.js'></script>
+  </body>
+</html>
