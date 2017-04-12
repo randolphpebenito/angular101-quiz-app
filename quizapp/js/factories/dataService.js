@@ -6,7 +6,8 @@
         function DataFactory() {
             var dataObj = {
                 empData: empData,
-                quizQuestions: quizQuestions
+                quizQuestions: quizQuestions,
+                correctAnswers: correctAnswers
             };
             return dataObj;
         }
