@@ -21,6 +21,7 @@
             }
 
 			function activateQuiz() {
+                console.log("activating quiz!");
                 quizMetrics.changeState("quiz", true);
 			}
         }
